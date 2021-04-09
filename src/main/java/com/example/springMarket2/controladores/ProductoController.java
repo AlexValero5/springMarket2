@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +54,20 @@ public class ProductoController {
 		Producto prod = productoService.crearProducto(p);
 		
 		return "redirect:/index";
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/perfil/{id}")
+	public ModelAndView perfilProducto(@PathVariable("id") long IdProducto,HttpServletRequest request) {
+		ModelAndView m = new ModelAndView();
+		Producto p1= productoService.obtenerProducto(IdProducto);
+		
+		
+		m.addObject("producto",p1);
+		m.setViewName("/producto/perfil");
+		
+		return m;
+		
 		
 	}
 }
