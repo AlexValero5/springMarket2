@@ -53,7 +53,7 @@ public class ProductoController {
 		
 		Producto prod = productoService.crearProducto(p);
 		
-		return "redirect:/index";
+		return "redirect:/producto/lista";
 		
 	}
 	
