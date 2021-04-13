@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.springMarket2.entidades.Producto;
@@ -69,5 +70,25 @@ public class ProductoController {
 		return m;
 		
 		
+	}
+	@RequestMapping(method = RequestMethod.GET, value = "/borrar/{idProducto}")
+	public String borrar( @PathVariable("idProducto") long idProducto) {
+
+		productoService.eliminarProducto(idProducto);
+
+		return "redirect:/producto/lista";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/busqueda")
+	public ModelAndView BuscarProducto(@RequestParam(name = "nombre") String nombre,
+										HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		List<Producto> lProducto = productoService.listarProductoPorNombre(nombre);
+
+		
+		mav.addObject("productos", lProducto);
+		mav.setViewName("resultado");
+
+		return mav;
 	}
 }

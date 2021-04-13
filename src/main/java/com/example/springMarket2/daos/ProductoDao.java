@@ -9,7 +9,7 @@ import com.example.springMarket2.entidades.Producto;
 
 public interface ProductoDao extends DaoGenerico<Producto>{
 	
-	public Producto buscarPorNombre(String nombreProducto);
+	public List<Producto> buscarPorNombre(String nombreProducto);
 	
 	public List<Producto> listarProductos();
 

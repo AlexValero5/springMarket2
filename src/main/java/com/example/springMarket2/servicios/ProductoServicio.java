@@ -18,4 +18,6 @@ public interface ProductoServicio {
 	
 
 	public List<Producto> listarProductos();
+	
+	public List<Producto> listarProductoPorNombre(String nombre);
 }
