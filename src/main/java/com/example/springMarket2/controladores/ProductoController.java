@@ -23,15 +23,7 @@ public class ProductoController {
 	@Autowired
 	ProductoServicio productoService;
 	
-	@RequestMapping(method= RequestMethod.GET, value = "lista")
-	public ModelAndView listarProductos() {
-		ModelAndView mav = new ModelAndView();
-		
-		List<Producto> lProducto = productoService.listarProductos();
-		mav.addObject("productos", lProducto);
-		mav.setViewName("producto/lista");
-		return mav;
-	}
+	
 	
 	
 	@GetMapping("/crear")
@@ -54,8 +46,7 @@ public class ProductoController {
 		
 		Producto prod = productoService.crearProducto(p);
 		
-		return "redirect:/producto/lista";
-		
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/perfil/{id}")
@@ -76,7 +67,7 @@ public class ProductoController {
 
 		productoService.eliminarProducto(idProducto);
 
-		return "redirect:/producto/lista";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/busqueda")
@@ -87,7 +78,7 @@ public class ProductoController {
 
 		
 		mav.addObject("productos", lProducto);
-		mav.setViewName("resultado");
+		mav.setViewName("producto/resultado");
 
 		return mav;
 	}
