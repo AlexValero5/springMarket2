@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Perfil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+  
+ 
+  <div class="card" style="width: 18rem;">
+ <img class="card-img-top" src="/images/descarga.png" alt="Card image cap" width="70" height="300">
+  <div class="card-body">
+    <h5 class="card-title"><span th:text="${usuario.nombre}"></span> </h5>
+    <p class="card-text"><span th:text="${usuario.apellidos}"></span></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><span th:text="${usuario.username}"></span></li>
+    <li class="list-group-item"><span th:text="${usuario.email}"></span></li>
+    <li class="list-group-item"><span th:text="${usuario.fechaNac}"></span></li>
+  </ul>
+  <!--  <div class="card-body">
+    <a th:href="@{'/producto/borrar/{idProducto}'(idProducto=${producto.idProducto})}"
+									class="btn btn-danger" ><i class="fas fa-trash">Borrar Producto</a>
+									
+	<a th:href="@{'/producto/agregarProducto/{idProducto}'(idProducto=${producto.idProducto})}"
+									class="btn btn-danger" ><i class="fas fa-trash">Añadir al Carrito</a>
+    
+  </div>-->
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>SginUp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+	
+
+	<div class="container my-5">
+		<h3>SignUp</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-10">
+					<form action="#" th:action="@{/registro}" method="post">
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label for="nombre" class="col-form-label">Nombre
+									</label> <input type="text" class="form-control"
+									id="nombre" placeholder="Nombre de usuario" name="nombre">
+							</div>
+
+							<div class="form-group col-md-8">
+								<label for="apellidos" class="col-form-label">Apellidos</label> <input
+									type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="username" class="col-form-label">Username
+									</label> <input type="text" class="form-control"
+									id="Username" placeholder="Nombre de usuario" name="username">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="password" class="col-form-label">Password
+									</label> <input type="password" class="form-control"
+									id="Password" placeholder="Contraseña" name="password">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="email" class="col-form-label">Email
+									</label> <input type="text" class="form-control"
+									id="email" placeholder="email" name="email">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="direccionFacturaccion" class="col-form-label">Dirección de Facturacion
+									</label> <input type="text" class="form-control"
+									id="direccionFacturacion" placeholder="Direccion de Facturaccion" name="direccionFacturacion">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="fechaNac" class="col-form-label">Fecha de Nacimiento
+									</label> <input type="text" class="form-control"
+									id="fechaNac" placeholder="Fecha Nacimiento" name="fechaNac">
+							</div>
+							
+
+							
+
+							<div class="form-group col-md-8">
+								<label for="numeroTarjeta" class="col-form-label">Numero Tarjeta</label>
+								<input type="number" class="form-control" name="numeroTarjeta" id="numeroTarjeta"
+									placeholder="Numero Tarjeta">
+							</div>
+							
+							<div class="form-group col-md-8">
+								<label for="codigoSeguridad" class="col-form-label">Codigo Seguridad</label> <input
+									type="number" class="form-control" id="codigoSeguridad" name="codigoSeguridad"
+									placeholder="csv">
+							</div>
+
+							<div class="col-md-6">
+								<input type="submit" class="btn btn-primary" value="SignUp">
+							</div>
+
+							<div class="form-group col-md-8"></div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

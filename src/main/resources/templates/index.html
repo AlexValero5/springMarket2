@@ -22,7 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a  th:href="@{/registro}" class="nav-link active" aria-current="page">SignUp</a>
+        </li>
+         <li class="nav-item">
+          <a  th:href="@{/login}" class="nav-link active" aria-current="page">Login</a>
+        </li>
+        <li class="nav-item">
+          <a  th:href="@{/logout}" class="nav-link active" aria-current="page">Logout</a>
         </li>
         </ul>
        
@@ -67,9 +73,11 @@
 					class="btn btn-primary"><i class="fas fa-user"></i>Perfil Producto</a></td>
 			</tr>
 		</tbody>
+		<div class="anadir_producto"
+				th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
 		<a th:href="@{/producto/crear}" class="btn btn-primary"><i
 			class="fas fa-user"></i> Añadir Producto</a>
-			
+			</div>
 			</table>
 
    
