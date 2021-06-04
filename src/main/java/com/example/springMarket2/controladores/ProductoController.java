@@ -77,9 +77,9 @@ public class ProductoController {
 	public ModelAndView BuscarProducto(@RequestParam(name = "nombre") String nombre,
 										HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		List<Producto> lProducto = productoService.listarProductoPorNombre(nombre);
+		Producto producto = productoService.listarProductoPorNombre(nombre);
 
-		mav.addObject("productos", lProducto);
+		mav.addObject("producto", producto);
 		mav.setViewName("producto/resultado");
 
 		return mav;

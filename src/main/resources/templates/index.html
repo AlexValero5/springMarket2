@@ -13,34 +13,7 @@
   <body>
   <h1>Pagina Web Alejandro Valero</h1>
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a  th:href="@{/registro}" class="nav-link active" aria-current="page">SignUp</a>
-        </li>
-         <li class="nav-item">
-          <a  th:href="@{/login}" class="nav-link active" aria-current="page">Login</a>
-        </li>
-        <li class="nav-item">
-          <a  th:href="@{/logout}" class="nav-link active" aria-current="page">Logout</a>
-        </li>
-        </ul>
-       
-       
-        
-      <form th:action="@{/producto/busqueda}" method="post" class="d-flex">
-        <input type="text" class="form-control me-2"  placeholder="Buscar Producto" aria-label="Search" name="nombre">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+    <nav th:replace="fragments/header_loader"></nav>
 
 
 <table class="table">
@@ -70,13 +43,12 @@
 				
 				  <td><a
 					th:href="@{/producto/perfil/{id}(id=${producto.idProducto})}"
-					class="btn btn-primary"><i class="fas fa-user"></i>Perfil Producto</a></td>
+					class="btn btn-primary">Perfil Producto</a></td>
 			</tr>
 		</tbody>
 		<div class="anadir_producto"
 				th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
-		<a th:href="@{/producto/crear}" class="btn btn-primary"><i
-			class="fas fa-user"></i> Añadir Producto</a>
+		<a th:href="@{/producto/crear}" class="btn btn-primary"> Añadir Producto</a>
 			</div>
 			</table>
 

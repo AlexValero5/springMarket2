@@ -11,16 +11,16 @@ import com.example.springMarket2.entidades.Usuario;
 @Component("UsuarioDao")
 public class UsuarioDaoImpl extends DaoGenericoImpl<Usuario> implements UsuarioDao{
 
-	@Override
-	public boolean logIn(String nombreUsuario, String contraseña) {
-		Usuario user = buscarPorNombreUsuario(nombreUsuario);
-		if(user==null)
-			return false;
-		else if(!user.getContraseña().equals(contraseña))
-			return false;
-		else
-			return true;
-	}
+//	@Override
+//	public boolean logIn(String nombreUsuario, String contraseña) {
+//		Usuario user = buscarPorNombreUsuario(nombreUsuario);
+//		if(user==null)
+//			return false;
+//		else if(!user.getContraseña().equals(contraseña))
+//			return false;
+//		else
+//			return true;
+//	}
 
 	@Override
 	public Usuario buscarPorNombreUsuario(String nombreUsuario) {

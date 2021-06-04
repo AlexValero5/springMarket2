@@ -43,7 +43,7 @@ public class PreguntaRespuestaController {
 		
 		Pregunta preg=preguntaServicio.crearPregunta(textoPregunta, idUsuario, idProducto);
 		
-		PreguntaDTO pdto = new PreguntaDTO(preg.getIdPregunta(), preg.getTextoPregunta(), preg.getFechaPregunta(), preg.getUsuario().getIdUsuario(), preg.getProducto().getIdProducto());
+		PreguntaDTO pdto = new PreguntaDTO(preg.getIdPregunta(), preg.getTextoPregunta(), preg.getFechaPregunta(), preg.getUsuario().getIdUsuario(), preg.getProducto().getIdProducto(),preg.getUsuario().getNombre());
 		
 		
 		return pdto;

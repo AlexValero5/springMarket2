@@ -64,6 +64,8 @@ public class CompraController {
 			
 			List<ItemCarrito> carro=(List<ItemCarrito>) s.getAttribute("carrito");
 			
+			if(carro!=null) {
+			
 			compra=compraservicio.comprar(id, carro);
 			
 			List<ItemCarrito> vacio=new ArrayList<ItemCarrito>();
@@ -71,6 +73,8 @@ public class CompraController {
 			s.setAttribute("carrito", vacio);
 			
 			return "redirect:/compra/misCompras"; 
+			}
+			else return "redirect:/index";
 			
 			
 			

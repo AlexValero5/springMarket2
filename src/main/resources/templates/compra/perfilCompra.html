@@ -8,6 +8,9 @@
 </head>
 
 <body>
+	<nav th:replace="fragments/header_loader"></nav>
+	
+	
   <div th:each="producto : ${productosCompra}">
   	<h3 th:text="${producto.nombreProducto}"></h3>
   	<p th:text="${producto.descripcionProducto}"></p>

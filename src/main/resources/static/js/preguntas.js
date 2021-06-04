@@ -33,7 +33,7 @@ function publicarPreguntametodo() {
             var columnaFecha=document.createElement("td");
             var columnaTexto=document.createElement("td");
 
-            columnaUsuario.appendChild(document.createTextNode(response.idPregunta));
+            columnaUsuario.appendChild(document.createTextNode(response.nombreUsuario));
             columnaTexto.appendChild(document.createTextNode(textoPregunta));
             columnaFecha.appendChild(document.createTextNode(response.fechaPregunta));
 

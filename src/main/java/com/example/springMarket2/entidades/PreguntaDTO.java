@@ -14,6 +14,18 @@ public class PreguntaDTO {
 	private Long idUsuario;
 	
 	private Long idProducto;
+	
+	private String nombreUsuario;
+	
+	
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
 
 	public Long getIdPregunta() {
 		return idPregunta;
@@ -56,13 +68,14 @@ public class PreguntaDTO {
 	}
 
 	public PreguntaDTO(Long idPregunta, String textoPregunta, LocalDate fechaPregunta, Long idUsuario,
-			Long idProducto) {
+			Long idProducto, String nombreUsuario) {
 		super();
 		this.idPregunta = idPregunta;
 		this.textoPregunta = textoPregunta;
 		this.fechaPregunta = fechaPregunta;
 		this.idUsuario = idUsuario;
 		this.idProducto = idProducto;
+		this.nombreUsuario=nombreUsuario;
 	}
 	
 	

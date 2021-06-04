@@ -4,7 +4,7 @@ import com.example.springMarket2.entidades.Usuario;
 
 public interface UsuarioServicio {
 	
-	public boolean logIn(String nombreUsuario, String contraseña);
+//	public boolean logIn(String nombreUsuario, String contraseña);
 	
 	public Usuario crearUsuario(Usuario usuario);
 	

@@ -27,11 +27,11 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-	@Override
-	public boolean logIn(String nombreUsuario, String contraseña) {
-		
-		return usuarioDao.logIn(nombreUsuario, contraseña);
-	}
+//	@Override
+//	public boolean logIn(String nombreUsuario, String contraseña) {
+//		
+//		return usuarioDao.logIn(nombreUsuario, contraseña);
+//	}
 
 	@Override
 	public Usuario crearUsuario(Usuario usuario) {
