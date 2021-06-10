@@ -7,7 +7,7 @@ import com.example.springMarket2.entidades.Respuesta;
 public interface RespuestaServicio {
 	
 	
-	public  Respuesta crearRespuesta(String respuesta,Long idUsuario,Pregunta pregunta) ;
+	public  Respuesta crearRespuesta(String respuesta,Long idUsuario,Long idPregunta) ;
 	
 	public Respuesta obtenerRespuesta(Long id);
 	

@@ -40,6 +40,7 @@ public class Respuesta implements Serializable{
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 	
+	public Respuesta() {}
 	public Respuesta(String textoRespuesta,LocalDate fechaRespuesta,Pregunta pregunta,Usuario usuario) {
 		
 		this.textoRespuesta=textoRespuesta;

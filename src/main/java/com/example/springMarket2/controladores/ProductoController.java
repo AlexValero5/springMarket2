@@ -77,13 +77,19 @@ public class ProductoController {
 	public ModelAndView BuscarProducto(@RequestParam(name = "nombre") String nombre,
 										HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		Producto producto = productoService.listarProductoPorNombre(nombre);
+		List<Producto> lProducto = productoService.listarProductoPorNombre(nombre);
 
-		mav.addObject("producto", producto);
-		mav.setViewName("producto/resultado");
+		mav.addObject("productos", lProducto);
+		mav.setViewName("index");
 
 		return mav;
 	}
+	
+
+	
+	
+	
+	
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/agregarProducto/{idProducto}")

@@ -2,6 +2,7 @@ package com.example.springMarket2.entidades;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 @Entity
 @Table(name = "USUARIO")
 public class Usuario implements Serializable{
@@ -64,6 +67,8 @@ public class Usuario implements Serializable{
 	@JoinTable(name = "USUARIO_ROL", joinColumns = @JoinColumn(name = "ID_USUARIO"), inverseJoinColumns = @JoinColumn(name = "ID_ROL"))
 	private Set<Rol> roles = new HashSet<>();
 	
+
+	
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Compra> compras = new HashSet<>();
@@ -75,6 +80,8 @@ public class Usuario implements Serializable{
 	private Set<Respuesta> respuestas = new HashSet<>();
 	
 
+	
+	
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -189,4 +196,6 @@ public class Usuario implements Serializable{
 	public void eliminarCompras(Compra compra) {
 		getCompras().remove(compra);
 	}
+	
+	
 }

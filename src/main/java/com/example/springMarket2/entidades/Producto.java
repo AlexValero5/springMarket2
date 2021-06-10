@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,6 +49,11 @@ private Integer cantidadProducto;
 
 @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 private Set<Pregunta> preguntas = new HashSet<>();
+
+
+
+@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "producto", orphanRemoval = true)
+private Set<Imagen> imagen = new HashSet<>();
 
 //@OneToMany(
 //		mappedBy = "producto",
@@ -135,6 +141,19 @@ public Set<Pregunta> getPreguntas() {
 
 public void setPreguntas(Set<Pregunta> preguntas) {
 	this.preguntas = preguntas;
+}
+
+public void addImagen(Imagen img) {
+	this.imagen.add(img);
+	img.setProducto(this);
+}
+
+public Set<Imagen> getImagen() {
+	return imagen;
+}
+
+public void setImagen(Set<Imagen> imagen) {
+	this.imagen = imagen;
 }
 
 

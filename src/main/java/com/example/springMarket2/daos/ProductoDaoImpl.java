@@ -18,13 +18,13 @@ import com.example.springMarket2.entidades.Producto;
 public class ProductoDaoImpl extends DaoGenericoImpl<Producto> implements ProductoDao{
 
 	@Override
-	public Producto buscarPorNombre(String nombreProducto) {
-		Query query = this.em.createQuery("FROM Producto u where u.nombreProducto= :nombreProducto");
-		query.setParameter("nombreProducto",nombreProducto);
-		Producto producto = (Producto) query.getSingleResult();
+	public List<Producto> buscarPorNombre(String nombreProducto) {
+		Query query = this.em.createQuery("FROM Producto u where u.nombreProducto LIKE :nombreProducto");
+		query.setParameter("nombreProducto","%"+nombreProducto+"%");
+		List<Producto> lProducto = query.getResultList();
 
-		if (producto != null) {
-			return producto;
+		if (lProducto != null) {
+			return lProducto;
 		}
 		return null;
 	}

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springMarket2.daos.RespuestaDao;
 import com.example.springMarket2.entidades.Pregunta;
+import com.example.springMarket2.entidades.Producto;
 import com.example.springMarket2.entidades.Respuesta;
 import com.example.springMarket2.entidades.Usuario;
 
@@ -19,14 +20,19 @@ public class RespuestaServicioImpl implements RespuestaServicio{
 	@Autowired RespuestaDao respuestaDao;
 	
 	@Autowired UsuarioServicio usuarioServicio;
+	
+	@Autowired PreguntaServicio preguntaServicio;
 
 	@Override
-	public Respuesta crearRespuesta(String respuesta, Long idUsuario, Pregunta pregunta) {
+	public Respuesta crearRespuesta(String respuesta, Long idUsuario, Long idPregunta) {
 		
 		Usuario u=usuarioServicio.obtenerUsuario(idUsuario);
 		
-		LocalDate fechaRespuesta=LocalDate.now();
-		Respuesta r=new Respuesta(respuesta,fechaRespuesta,pregunta,u);
+		Pregunta p=preguntaServicio.obtenerPregunta(idPregunta);
+		
+		LocalDate fechaPregunta=LocalDate.now();
+		
+		Respuesta r=new Respuesta(respuesta,fechaPregunta,p,u);
 		
 		Respuesta persistida=respuestaDao.crear(r);
 		
