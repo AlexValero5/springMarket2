@@ -3,6 +3,7 @@ package com.example.springMarket2.controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.springMarket2.entidades.ItemCarrito;
 import com.example.springMarket2.entidades.Producto;
+import com.example.springMarket2.entidades.Rol;
+import com.example.springMarket2.entidades.Usuario;
 import com.example.springMarket2.servicios.ProductoServicio;
+import com.example.springMarket2.servicios.UsuarioServicio;
+import com.mysql.cj.Session;
 
 @Controller
 @RequestMapping(value = "/producto")
@@ -26,12 +31,27 @@ public class ProductoController {
 	@Autowired
 	ProductoServicio productoService;
 	
+	@Autowired 
+	UsuarioServicio usuarioServicio;
+	
 	
 	
 	
 	@GetMapping("/crear")
-	public String showForm() {
-		return "producto/crear";
+	public String showForm(HttpServletRequest request) {
+		
+		HttpSession s=request.getSession();
+		Usuario u = usuarioServicio.obtenerUsuario((long) s.getAttribute("idUsuario"));
+		boolean esAdmin=false;
+		for (Rol r : u.getRoles())
+            if (r.getNombreRol().equals("ROL_ADMIN"))
+                esAdmin = true;
+
+        if (esAdmin)
+            return "/producto/crear";
+        else
+            return "redirect:/index";
+		
 	}
 	
 	@PostMapping("/crear")

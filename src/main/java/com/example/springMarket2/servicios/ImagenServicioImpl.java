@@ -44,27 +44,27 @@ public class ImagenServicioImpl  implements ImagenServicio{
 		}
 	}
 
-	public Boolean actualizarImagen(long idUsuario, MultipartFile file) {
+	public Boolean actualizarImagen(long idProducto, MultipartFile file) {
 
-		Producto p = productoDao.buscar(idUsuario);
+		Producto p = productoDao.buscar(idProducto);
 
 		if (p == null)
 			return false;
 		try {
 			byte[] image = file.getBytes();
-			if (!p.getImagen().isEmpty()) {
+            if (p.getImagen() != null) {
 
-				Set<Imagen> limg = p.getImagen();
-				for (Imagen a : limg) {
-					a.setImagen(image);
-					imagenRepository.save(a);
-					return true;
-				}
-				return null;
+                Imagen linkedimg = p.getImagen();
+                linkedimg.setImagen(image);
+                p.setImagen(linkedimg);
+                productoDao.actualizar(p);
+                return true;
+				
+				
 
 			} else {
 				Imagen img = new Imagen("foto", image);
-				p.addImagen(img);
+				p.anadirImagen(img);
 				productoDao.actualizar(p);
 				return true;
 			}

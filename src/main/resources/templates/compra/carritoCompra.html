@@ -23,8 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:if="${carrito 
-			!= null && carrito.empty}">
+			<tr th:if="${carrito == null OR carrito.empty}">
 				<td colspan="2">No hay productos en el carrito</td>
 			</tr>
 			<tr th:each="itc : ${carrito}">
@@ -39,7 +38,7 @@
  				<td></td> 
  			</tr> 
 		</tbody>
-		<div><a 
+		<div th:if="${carrito != null && !carrito.empty}"><a 
  					th:href="@{/compra/finalizarCompra}" 
  					class="btn btn-primary">Comprar</a></div>
 		

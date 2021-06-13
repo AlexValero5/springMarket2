@@ -24,7 +24,7 @@
 				<th scope="col">Precio</th>
 				<th scope="col">Descuento</th>
 				
-				<th scope="col">Id</th>
+				<th scope="col">Opciones</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,17 +39,14 @@
 						Precio </span></td>
 						<td><span th:text="${producto.descuentoProducto}">
 						Descuento </span></td>
-				<td><span th:text="${producto.idProducto}"> Id </span></td>
+				<!-- <td><span th:text="${producto.idProducto}"> Id </span></td> -->
 				
 				  <td><a
 					th:href="@{/producto/perfil/{id}(id=${producto.idProducto})}"
 					class="btn btn-primary">Perfil Producto</a></td>
 			</tr>
 		</tbody>
-		<div class="anadir_producto"
-				th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
-		<a th:href="@{/producto/crear}" class="btn btn-primary"> Añadir Producto</a>
-			</div>
+		
 			</table>
 
    

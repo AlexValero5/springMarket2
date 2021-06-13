@@ -128,6 +128,15 @@ public class CompraController {
 			
 		}
 		
+		@RequestMapping(method=RequestMethod.GET, value="/devolverCompra/{idCompra}")
+		public String devolverCompra(@PathVariable("idCompra") long idCompra) {
+			
+			compraservicio.borrarCompra(idCompra);
+			
+			return "redirect:/compra/misCompras";
+			
+		}
+		
 		
 	}
 

@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -52,8 +53,8 @@ private Set<Pregunta> preguntas = new HashSet<>();
 
 
 
-@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "producto", orphanRemoval = true)
-private Set<Imagen> imagen = new HashSet<>();
+@OneToOne (mappedBy = "producto", cascade = CascadeType.ALL)
+private Imagen imagen;
 
 //@OneToMany(
 //		mappedBy = "producto",
@@ -143,18 +144,26 @@ public void setPreguntas(Set<Pregunta> preguntas) {
 	this.preguntas = preguntas;
 }
 
-public void addImagen(Imagen img) {
-	this.imagen.add(img);
-	img.setProducto(this);
-}
-
-public Set<Imagen> getImagen() {
+public Imagen getImagen() {
 	return imagen;
 }
 
-public void setImagen(Set<Imagen> imagen) {
+public void setImagen(Imagen imagen) {
 	this.imagen = imagen;
 }
+
+public void anadirImagen(Imagen img) {
+    this.imagen = img;
+    img.setProducto(this);
+}
+
+
+//public void addImagen(Imagen img) {
+//	this.imagen.add(img);
+//	img.setProducto(this);
+//}
+
+
 
 
 }

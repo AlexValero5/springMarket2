@@ -71,7 +71,7 @@ public class ImagenController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/index";
+			return "redirect:/imagenes/cargar/" + idProducto;
 		}
 	}
 

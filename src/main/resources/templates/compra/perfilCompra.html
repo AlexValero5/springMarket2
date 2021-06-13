@@ -5,17 +5,48 @@
   <title>HTML</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <style>
+  	.producto{
+  		padding: 0.5em;
+	    margin: 1em;
+	    border-color: #4CAF50;                                    
+	    border-style:groove;
+	    border-radius:1em;
+	    float: left;                                           
+        width: 27%;
+        overflow: hidden;
+  	}
+  	
+  	.producto h3{
+  		text-align: center;
+  		
+  	}
+  </style>
 </head>
 
 <body>
 	<nav th:replace="fragments/header_loader"></nav>
 	
 	
-  <div th:each="producto : ${productosCompra}">
-  	<h3 th:text="${producto.nombreProducto}"></h3>
+  <div class="producto" th:each="producto : ${productosCompra}">
+  
+  <h3 th:text="${producto.nombreProducto}"></h3>
+  	 
+  	<div th:if="${producto.imagen == null}">
+  		<img class="card-img-top" src="/images/caja.jpg" >
+  	</div>
+  	<div  th:if="${producto.imagen != null}">
+		<label> <img
+			th:src="@{/imagenes/{id}(id=${producto.imagen.id})}"
+			width="150" height="150" />
+		</label> 
+					
+	</div>
+	
+  	
   	<p th:text="${producto.descripcionProducto}"></p>
-  	<p th:text="${producto.precioProducto}"></p>
-  	<p th:text="${producto.cantidadProducto}"></p>	
+  	<p th:text="'Precio del Producto: ' + ${producto.precioProducto} + '$'"></p>
+  	<p th:text="'Cantidad del Producto: ' +${producto.cantidadProducto}"></p>	
   </div>
 </body>
 </html>

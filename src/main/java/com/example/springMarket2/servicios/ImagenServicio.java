@@ -10,6 +10,6 @@ public interface ImagenServicio {
 	
 	public Imagen obtenerImagen(Long id);
 	
-	public Boolean actualizarImagen(long idProfesor, MultipartFile file);
+	public Boolean actualizarImagen(long idProducto, MultipartFile file);
 
 }

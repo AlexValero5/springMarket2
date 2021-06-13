@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,9 +29,9 @@ public class Imagen {
 	@Column(name = "IMAGEN")
 	private byte[] imagen;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_PRODUCTO")
-	private Producto producto;
+	@OneToOne
+    @JoinColumn(name = "ID_PRODUCTO")
+    private Producto producto;
 
 	public Imagen() {
 		super();
@@ -45,6 +46,8 @@ public class Imagen {
 	public Long getId() {
 		return id;
 	}
+	
+	
 
 	public void setId(Long id) {
 		this.id = id;

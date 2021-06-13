@@ -7,17 +7,36 @@
   <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
+	<style>
+		.devolverCompra{
+		 padding: 0.5em;
+	    background-color: indianred;                                  
+	    color:white;
+	    border-radius: 0.5em;
+	    text-decoration:none;
+		}
+		
+		.devolverCompra:hover{
+			background-color: darkred;
+			text-decoration:none;
+			color:grey;
+		}
+		h1{
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
 	<nav th:replace="fragments/header_loader"></nav>
-  <h4  class="display-1">Mis Compras</h4>
+  <h1>Mis Compras</h1>
 
 	
-	<table class="table">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th scope="col">IdCompra</th>
+				<th scope="col">Precio</th>
 				
 			</tr>
 		</thead>
@@ -27,10 +46,14 @@
 			</tr>
 			<tr th:each="c : ${compras}">
 				<td><span th:text="${c.idCompra}"> Id </span></td>
+				<td><span th:text="${c.precio} + '$'"> Precio </span></td>
 			
 			<td><a
 					th:href="@{/compra/productosCompra/{id}(id=${c.idCompra})}"
 					class="btn btn-primary"><i class="fas fa-user"></i>Perfil Compra</a></td>
+			<td><a class="devolverCompra"
+					th:href="@{/compra/devolverCompra/{id}(id=${c.idCompra})}"
+					>Devolver Compra</a></td>
 				
 				
  			</tr> 

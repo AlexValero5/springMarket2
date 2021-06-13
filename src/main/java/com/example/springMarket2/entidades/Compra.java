@@ -44,6 +44,9 @@ public class Compra {
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
+	
+	@Column(name="PRECIO")
+	private Float precio;
 
 	
     //https://stackoverflow.com/questions/26437501/hibernate-inverse-join-for-composite-primary-key
@@ -54,8 +57,18 @@ public class Compra {
 	
 	//private Date fecha;
 	
+	
+	
 	public Long getIdCompra() {
 		return idCompra;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
 	}
 
 	public void setIdCompra(Long idCompra) {
@@ -73,9 +86,12 @@ public class Compra {
 	}
 
 	public boolean anadirProducto(Producto producto) {
-		producto.anadirCompra(this);
-		return getProductos().add(producto);
-	}
+        producto.getCompras().add(this);
+        if (getPrecio() == null)
+            setPrecio(0F);
+        setPrecio(getPrecio() + producto.getPrecioProducto() * producto.getCantidadProducto());
+        return getProductos().add(producto);
+    }
 
 	public void eliminarProducto(Producto producto) {
 		this.productos.remove(producto);

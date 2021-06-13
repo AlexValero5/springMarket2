@@ -1,7 +1,7 @@
 $("body").on('click', '#publicarPregunta', publicarPreguntametodo);
 
  
-//$("body").on('click', '#botonResponder', botonParaResponder);
+$("body").on('click', '#botonResponder', botonParaResponder);
 
 //$("body").on('click', '#borraPregunta', borrarPreguntaMetodo);
 
@@ -14,18 +14,24 @@ $(document).ready(function() {
     	}
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	var boton= document.getElementsByClassName('btn-primary');
 
     	for (var i = 0 ; i < boton.length; i++) {
     		boton[i].addEventListener('click' , publicarRespuestametodo , false ) ; 
     	}
-});
+});*/
 /////////////////////////////////////////////////////////////////////////
 function publicarPreguntametodo() {
     var textoPregunta= $('#textoPregunta').val();
-
-    var idProducto = $('#idProducto').val();    
+    
+	$('#textoPregunta').val('');
+	
+    var idProducto = $('#idProducto').val();   
+    
+    if (textoPregunta == "") {
+		return document.location.reload(true);
+	} 
 
 
     var token = $("meta[name='_csrf']").attr("content");
@@ -48,6 +54,8 @@ function publicarPreguntametodo() {
 		data: JSON.stringify(cuerpo),
 		type: "POST",
 		success: function(response){
+		
+		
 
             
             var fila=document.createElement("tr");
@@ -85,7 +93,7 @@ function publicarPreguntametodo() {
             var borrarPregunta=document.createElement("button");
             var divBoton=document.createElement("div");
             
-//            divRespuesta.style.display="none";
+	         divRespuesta.style.display="none";
             textoRespuesta.id = "textoRespuesta";
 			textoRespuesta.name = "textoRespuesta";
 			
@@ -226,11 +234,11 @@ function borrarPreguntaMetodo(){
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-//function botonParaResponder() {
-//
-//$(this).next().toggle();
-//
-//}
+function botonParaResponder() {
+
+$(this).next().toggle();
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -239,6 +247,11 @@ function publicarRespuestametodo() {
 
     var idPregunta = $(this).val();
 	var textoRespuesta = $(this).prev().val();    
+	$(this).prev().val('');   
+	
+	 if (textoRespuesta == "") {
+		return document.location.reload(true);
+	}  
 
 
     var token = $("meta[name='_csrf']").attr("content");
@@ -289,12 +302,12 @@ function publicarRespuestametodo() {
         },
         error: function(xhr, status, error) {
 
-		/*var alerta =
+		var alerta =
 		"<div class='alert alert-danger' role='alert'>" +
 		"Error" +
 		"</div>";
 
-			$('#preguntaError').html(alerta);*/
+			$('#preguntaError').html(alerta);
         }
 
     });

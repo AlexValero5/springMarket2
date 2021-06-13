@@ -34,19 +34,7 @@
 		margin: 0.5em;}
 	</style>
 
-<script type="text/javascript">
-	 	$(function(){
-		    $("#upload_link").on('click', function(e){
-		        e.preventDefault();
-		        $("#upload:hidden").trigger('click');
-		    });
-		    $("#upload:hidden").on('change', function(e){
-		        e.preventDefault();
-		        //submit form
-		        $('#inputForm').submit();
-		    });
-		});
-	 </script>
+
 </head>
 
 <body>
@@ -56,25 +44,29 @@
   
  
   <div class="card" style="width: 18rem;">
-  	<div sec:authorize="hasAuthority('ROL_ADMIN')">
+  	<div th:if="${producto.imagen == null}">
+  		<img class="card-img-top" src="/images/caja.jpg" alt="Card image cap" width="70" height="300">
+  	</div>
+  	<div  th:if="${producto.imagen != null}">
+		<label> <img
+			th:src="@{/imagenes/{id}(id=${producto.imagen.id})}"
+			width="150" height="150" />
+		</label> 
+					
+	</div>
+		<div sec:authorize="hasAuthority('ROL_ADMIN')">
   	
 	  	<form th:action="@{/imagenes/cargar/{idProducto}(idProducto=${producto.idProducto})}"
 			method="POST" enctype="multipart/form-data">
-			<div >
-				<label> <img
-					th:src="@{/imagenes/{idProducto}(idProducto=${producto.idProducto})}"
-					width="200" height="200" />
-				</label> <input name="file"  type="file" onchange="this.form.submit();"/>
-					
-			</div>
+			<input name="file"  type="file" />
+				<input type="submit" value="Actualizar imagen"/>
+			
 		</form>
+		
+		
   	
   	</div>
-  	<div sec:authorize="hasAuthority('ROL_USUARIO')">
-  		<img
-		th:src="@{/imagenes/{idProducto}(idProducto=${producto.idProducto})}"
-		width="100" height="100" />
-  	</div>
+  	
 	 
   <div class="card-body">
 	    <h5 class="card-title"><span th:text="${producto.nombreProducto}"></span> </h5>
@@ -100,7 +92,7 @@
 	</div>
 
 
-	<div id="preguntas">
+	<div id="preguntas" th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'') OR hasAuthority(''ROL_USUARIO'')')}">
 		
 	
 			<label for="pregunta">Pregunte aquí</label>
@@ -135,9 +127,9 @@
 				<!--  <td th:id="${pregunta.idPregunta}" style="display: none;"></td>-->
 				<td th:text="${pregunta.fechaPregunta}"></td>
 				
-				<td>
+				<td >
 							<button type="button" id="botonResponder" class="btn btn-primary">Responder</button>
-							<div  >
+							<div  style="display:none;">
 								<textarea id="textoRespuesta" name="textoRespuesta"
 									></textarea>
 								<button type="button" id="botonRespuesta"
