@@ -2,8 +2,9 @@ $("body").on('click', '#publicarPregunta', publicarPreguntametodo);
 
  
 $("body").on('click', '#botonResponder', botonParaResponder);
+$("body").on('click', '#botonParaEditar', botonParaResponder);
 
-//$("body").on('click', '#borraPregunta', borrarPreguntaMetodo);
+$("body").on('click', '#borraRespuesta', borrarRespuesta);
 
 $("body").on('click', '#botonRespuesta', publicarRespuestametodo);
 $(document).ready(function() {
@@ -14,13 +15,7 @@ $(document).ready(function() {
     	}
 });
 
-/*$(document).ready(function() {
-	var boton= document.getElementsByClassName('btn-primary');
 
-    	for (var i = 0 ; i < boton.length; i++) {
-    		boton[i].addEventListener('click' , publicarRespuestametodo , false ) ; 
-    	}
-});*/
 /////////////////////////////////////////////////////////////////////////
 function publicarPreguntametodo() {
     var textoPregunta= $('#textoPregunta').val();
@@ -76,10 +71,14 @@ function publicarPreguntametodo() {
             var listaUsuario=document.createElement("span");
             var listaTexto=document.createElement("span");
             var listaFecha=document.createElement("span");
+            var listaOpciones=document.createElement("span");
+            
+            
             
             listaUsuario.appendChild(document.createTextNode("Usuarios"));
             listaTexto.appendChild(document.createTextNode(" Respuesta"));
             listaFecha.appendChild(document.createTextNode(" FechaRespuesta"));
+            listaOpciones.appendChild(document.createTextNode(" Opciones"));
             
             respuestas.id="Respuesta"+response.idPregunta;
             
@@ -131,6 +130,7 @@ function publicarPreguntametodo() {
             listaLi.appendChild(listaUsuario);
             listaLi.appendChild(listaTexto);
             listaLi.appendChild(listaFecha);
+            listaLi.appendChild(listaOpciones);
             
             lista.appendChild(listaLi); 
             respuestas.appendChild(lista);
@@ -280,6 +280,40 @@ function publicarRespuestametodo() {
 			var usuario = document.createElement("span");
 			var texto = document.createElement("span");
 			var fecha = document.createElement("span");
+			var opciones=document.createElement("span");
+			
+			var spanEditar=document.createElement("span");
+			var textareaEditar=document.createElement("textarea");
+			textareaEditar.id="textoEditarRespuesta";
+			textareaEditar.name="textoEditarRespuesta";
+			spanEditar.style.display="none";
+			
+			var botonParaEditar=document.createElement("button");
+			var botonBorraRespuesta=document.createElement("button");
+			var botonConfirmarEdicion=document.createElement("button");
+			botonParaEditar.id="botonParaEditar";
+			botonBorraRespuesta.type="button";
+			botonBorraRespuesta.classList="botRespuesta";
+			botonBorraRespuesta.id="borraRespuesta";
+			botonBorraRespuesta.value=response.idRespuesta;
+			botonConfirmarEdicion.value=response.idRespuesta;
+			
+			
+			botonBorraRespuesta.type="button";
+			botonConfirmarEdicion.classList="btn btn-primary";
+			botonParaEditar.classList="btn btn-primary";
+			
+			botonParaEditar.appendChild(document.createTextNode("Editar"));
+			botonBorraRespuesta.appendChild(document.createTextNode("Borrar"));
+			botonConfirmarEdicion.appendChild(document.createTextNode("Aceptar"));
+			
+			
+			spanEditar.appendChild(textareaEditar);
+			spanEditar.appendChild(botonConfirmarEdicion);
+			
+			opciones.appendChild(botonBorraRespuesta);
+			opciones.appendChild(botonParaEditar);
+			opciones.appendChild(spanEditar);
 			
 			
 			usuario.appendChild(document.createTextNode(response.nombreUsuario));
@@ -289,6 +323,7 @@ function publicarRespuestametodo() {
            fila.appendChild(usuario);
            fila.appendChild(texto);
            fila.appendChild(fecha);
+           fila.appendChild(opciones);
            
            ul.appendChild(fila);
            
@@ -313,3 +348,85 @@ function publicarRespuestametodo() {
     });
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+function borrarRespuesta() {
+
+	var idRespuesta = $(this).val();
+	var obj=$(this);
+
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+
+	var cuerpo = {
+		"idRespuesta": idRespuesta
+	};
+
+	$.ajax({
+		url: "/respuesta/borrarRespuesta/",
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(cuerpo),
+		type: "POST",
+		success: function(response) {
+
+			obj.closest("ul").remove();
+			
+			
+		},
+		error: function(xhr, status, error) {
+
+			var alerta =
+				"<div class='alert alert-danger' role='alert'>" +
+				"Error: No se pudo borrar</div>";
+
+			$('#PreguntaError').html(alerta);
+		}
+
+	});
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function editarRespuesta() {
+
+	var idRespuesta = $(this).val();
+	var obj=$(this);
+
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+
+	var cuerpo = {
+		"idRespuesta": idRespuesta
+	};
+
+	$.ajax({
+		url: "/respuesta/borrarRespuesta/",
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(cuerpo),
+		type: "POST",
+		success: function(response) {
+
+			obj.closest("ul").remove();
+			
+			
+		},
+		error: function(xhr, status, error) {
+
+			var alerta =
+				"<div class='alert alert-danger' role='alert'>" +
+				"Error: No se pudo borrar</div>";
+
+			$('#PreguntaError').html(alerta);
+		}
+
+	});
+}

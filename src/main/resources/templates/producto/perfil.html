@@ -32,6 +32,14 @@
 		.lista{
 		padding:0.5em;
 		margin: 0.5em;}
+		
+		.botRespuesta{
+			background-color: red;
+			border-style: none;
+			border-radius: 0.5em;
+			padding:0.5em;
+			margin: 0.5em;
+		}
 	</style>
 
 
@@ -150,12 +158,23 @@
 							<span>Usuario</span>
 							<span>Respuesta</span>
 							<span>Fecha</span>
+							<span>Opciones</span>
 						</li>
 					</ul>
 					<ul th:each="respuesta : ${pregunta.respuestas}">
 						<li class="lista"><span th:text="${respuesta.usuario.nombre}"></span>
 							<span th:text="${respuesta.textoRespuesta}"></span>
 							<span th:text="${respuesta.fechaRespuesta}"></span>
+							<span th:if="${session.idUsuario == respuesta.usuario.idUsuario or #authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
+								
+									<button type="button" class="botRespuesta" id="borraRespuesta" th:value="${respuesta.idRespuesta}">Borrar </button>
+									<button type="button" id="botonParaEditar" class="btn btn-primary">Editar</button>
+									<span style="display: none;">
+										 <textarea id="textoEditarRespuesta" name="textoEditarRespuesta" class="form-control"></textarea>
+														
+										<button type="button" id="confirmarEdicion" class="btn btn-primary" th:value="${respuesta.idRespuesta}">Aceptar</button>	
+									</span>
+							</span>
 							
 						</li>
 					</ul>

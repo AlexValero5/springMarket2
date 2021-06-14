@@ -91,5 +91,17 @@ public class PreguntaRespuestaController {
 		return rdto;
 
 	}
+	
+	
+	@RequestMapping(value = "/respuesta/borrarRespuesta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Long borrarRespuesta(@RequestBody JsonNode values, HttpServletRequest request) {
+
+		Long idRespuesta = values.findValue("idRespuesta").asLong();
+
+		respuestaServicio.borrarRespuesta(idRespuesta);
+		return idRespuesta;
+
+	}
 
 }
