@@ -10,17 +10,20 @@
 	<style>
 		#titulo{
 		text-align: center;
+		        	color: darkblue;
+		
 		}
 		#preguntas{
 		float: left;
-		margin: o.5em;
-		padding: o.5em;
+		margin: 0.5em;
+		padding: 0.5em;
 		}
 		
 		.card{
 		float: left;
 		overflow: hidden;
 		margin: 0.5em;
+		padding: 0.5em;
 		}
 		
 		#publicarPregunta{
@@ -39,6 +42,10 @@
 			border-radius: 0.5em;
 			padding:0.5em;
 			margin: 0.5em;
+			color: white;
+		}
+		#tabla{
+			margin: 1em;
 		}
 	</style>
 
@@ -53,7 +60,7 @@
  
   <div class="card" style="width: 18rem;">
   	<div th:if="${producto.imagen == null}">
-  		<img class="card-img-top" src="/images/caja.jpg" alt="Card image cap" width="70" height="300">
+  		<img class="card-img-top" src="/images/caja.jpg" alt="Card image cap" width="100" height="250">
   	</div>
   	<div  th:if="${producto.imagen != null}">
 		<label> <img
@@ -77,13 +84,13 @@
   	
 	 
   <div class="card-body">
-	    <h5 class="card-title"><span th:text="${producto.nombreProducto}"></span> </h5>
-	    <p class="card-text"><span th:text="${producto.descripcionProducto}"></span></p>
+	    <h5 class="card-title"><span th:text="'Nombre: '+${producto.nombreProducto}"></span> </h5>
+	    <p class="card-text"><span th:text="'Descripcion: '+${producto.descripcionProducto}"></span></p>
 	  </div>
 	  <ul class="list-group list-group-flush">
-	    <li class="list-group-item"><span th:text="${producto.precioProducto} + '$'"></span></li>
-	    <li class="list-group-item"><span th:text="${producto.descripcionProducto}"></span></li>
-	    <li class="list-group-item"><span th:text="${producto.idProducto}"></span></li>
+	    <li class="list-group-item"><span th:text="'Precio: '+${producto.precioProducto} + '$'"></span></li>
+	   
+	    <li class="list-group-item"><span th:text="'Descuento: '+${producto.descuentoProducto}+ '$'"></span></li>
 	  </ul>
 	  <div class="card-body">
 	  	<p th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
@@ -114,7 +121,7 @@
 		<div id="preguntaError"></div>
 	</div>
 
-	<table class="table table-bordered"  width="100%" style="width: 40%;">
+	<table id="tabla" class="table table-bordered"  width="100%" style="width: 40%;">
 							 
 		<thead>
 			<tr>
@@ -163,7 +170,7 @@
 					</ul>
 					<ul th:each="respuesta : ${pregunta.respuestas}">
 						<li class="lista"><span th:text="${respuesta.usuario.nombre}"></span>
-							<span th:text="${respuesta.textoRespuesta}"></span>
+							<span th:id="'textoRespuesta' + ${respuesta.idRespuesta}" th:text="${respuesta.textoRespuesta}"></span>
 							<span th:text="${respuesta.fechaRespuesta}"></span>
 							<span th:if="${session.idUsuario == respuesta.usuario.idUsuario or #authorization.expression('hasAuthority(''ROL_ADMIN'')')}">
 								

@@ -6,14 +6,12 @@ $("body").on('click', '#botonParaEditar', botonParaResponder);
 
 $("body").on('click', '#borraRespuesta', borrarRespuesta);
 
-$("body").on('click', '#botonRespuesta', publicarRespuestametodo);
-$(document).ready(function() {
-	var boton= document.getElementsByClassName('btn-danger');
+$("body").on('click', '#borraPregunta', borrarPreguntaMetodo);
 
-    	for (var i = 0 ; i < boton.length; i++) {
-    		boton[i].addEventListener('click' , borrarPreguntaMetodo , false ) ; 
-    	}
-});
+$("body").on('click', '#botonRespuesta', publicarRespuestametodo);
+
+$("body").on('click', '#confirmarEdicion', editarRespuestametodo);
+
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -288,6 +286,8 @@ function publicarRespuestametodo() {
 			textareaEditar.name="textoEditarRespuesta";
 			spanEditar.style.display="none";
 			
+			texto.id="textoRespuesta"+response.idRespuesta;
+			
 			var botonParaEditar=document.createElement("button");
 			var botonBorraRespuesta=document.createElement("button");
 			var botonConfirmarEdicion=document.createElement("button");
@@ -302,6 +302,7 @@ function publicarRespuestametodo() {
 			botonBorraRespuesta.type="button";
 			botonConfirmarEdicion.classList="btn btn-primary";
 			botonParaEditar.classList="btn btn-primary";
+			botonConfirmarEdicion.id="confirmarEdicion";
 			
 			botonParaEditar.appendChild(document.createTextNode("Editar"));
 			botonBorraRespuesta.appendChild(document.createTextNode("Borrar"));
@@ -382,7 +383,7 @@ function borrarRespuesta() {
 
 			var alerta =
 				"<div class='alert alert-danger' role='alert'>" +
-				"Error: No se pudo borrar</div>";
+				"Error al borrar</div>";
 
 			$('#PreguntaError').html(alerta);
 		}
@@ -391,10 +392,12 @@ function borrarRespuesta() {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function editarRespuesta() {
+function editarRespuestametodo() {
 
 	var idRespuesta = $(this).val();
-	var obj=$(this);
+	var respuesta=$(this).prev().val();
+	
+	$(this).prev().val(' ');
 
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
@@ -404,18 +407,19 @@ function editarRespuesta() {
 	});
 
 	var cuerpo = {
-		"idRespuesta": idRespuesta
+		"idRespuesta": idRespuesta,
+		"respuesta": respuesta
 	};
 
 	$.ajax({
-		url: "/respuesta/borrarRespuesta/",
+		url: "/respuesta/editarRespuesta/",
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
 		data: JSON.stringify(cuerpo),
 		type: "POST",
 		success: function(response) {
 
-			obj.closest("ul").remove();
+			$('#'+'textoRespuesta'+response.idRespuesta).text(" " +respuesta);
 			
 			
 		},
@@ -423,7 +427,7 @@ function editarRespuesta() {
 
 			var alerta =
 				"<div class='alert alert-danger' role='alert'>" +
-				"Error: No se pudo borrar</div>";
+				"Error al editar</div>";
 
 			$('#PreguntaError').html(alerta);
 		}

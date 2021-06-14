@@ -50,5 +50,16 @@ public class RespuestaServicioImpl implements RespuestaServicio{
 		respuestaDao.borrar(idRespuesta);
 		
 	}
+	
+	
+	@Override
+	public Respuesta editarRespuesta(Long idRespuesta, String respuesta) {
+		Respuesta editada=respuestaDao.buscar(idRespuesta);
+		respuestaDao.borrar(idRespuesta);
+		editada.setTextoRespuesta(respuesta);
+		respuestaDao.crear(editada);
+		return editada;
+		
+	}
 
 }

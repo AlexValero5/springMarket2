@@ -29,7 +29,7 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<Producto> lProducto = productoService.listarProductos();
-		mav.addObject("productos", lProducto);
+		mav.addObject("productos", lProducto.subList(0, 8));
 		mav.setViewName("index");
 		return mav;
 	}

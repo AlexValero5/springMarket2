@@ -12,5 +12,7 @@ public interface RespuestaServicio {
 	public Respuesta obtenerRespuesta(Long id);
 	
 	public void borrarRespuesta(Long idRespuesta);
+	
+	public Respuesta editarRespuesta(Long idRespuesta, String respuesta);
 
 }

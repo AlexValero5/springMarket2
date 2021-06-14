@@ -103,5 +103,23 @@ public class PreguntaRespuestaController {
 		return idRespuesta;
 
 	}
+	
+	@RequestMapping(value = "/respuesta/editarRespuesta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public RespuestaDTO editarRespuesta(@RequestBody JsonNode values, HttpServletRequest request) {
+		
+		Long idRespuesta = values.findValue("idRespuesta").asLong();
+		String respuesta = values.findValue("respuesta").asText();
+		
+		Respuesta r=respuestaServicio.editarRespuesta(idRespuesta, respuesta);
+		
+		RespuestaDTO editada=new RespuestaDTO(r.getIdRespuesta(),r.getTextoRespuesta(),r.getFechaRespuesta(),r.getPregunta().getIdPregunta(),
+				r.getUsuario().getNombre(),r.getUsuario().getIdUsuario());
+		
+		return editada;
+		
+	}
+	
+	
 
 }
