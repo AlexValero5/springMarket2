@@ -56,20 +56,34 @@ public class ProductoController {
 	
 	@PostMapping("/crear")
 	public String crearProducto(HttpServletRequest request) {
-		String nombre = request.getParameter("nombreProducto");
-		String descripcion = request.getParameter("descripcionProducto");
-		Float precio = Float.parseFloat(request.getParameter("precioProducto"));
-		Integer descuento = Integer.parseInt(request.getParameter("descuentoProducto"));
 		
-		Producto p = new Producto();
-		p.setNombreProducto(nombre);
-		p.setDescripcionProducto(descripcion);
-		p.setPrecioProducto(precio);
-		p.setDescuentoProducto(descuento);
+		HttpSession s=request.getSession();
+		Usuario u = usuarioServicio.obtenerUsuario((long) s.getAttribute("idUsuario"));
+		boolean esAdmin=false;
+		for (Rol r : u.getRoles())
+            if (r.getNombreRol().equals("ROL_ADMIN"))
+                esAdmin = true;
 		
-		Producto prod = productoService.crearProducto(p);
+		if(esAdmin) {
+			
 		
-		return "redirect:/index";
+			String nombre = request.getParameter("nombreProducto");
+			String descripcion = request.getParameter("descripcionProducto");
+			Float precio = Float.parseFloat(request.getParameter("precioProducto"));
+			Integer descuento = Integer.parseInt(request.getParameter("descuentoProducto"));
+			
+			Producto p = new Producto();
+			p.setNombreProducto(nombre);
+			p.setDescripcionProducto(descripcion);
+			p.setPrecioProducto(precio);
+			p.setDescuentoProducto(descuento);
+			
+			Producto prod = productoService.crearProducto(p);
+			
+			return "redirect:/producto/perfil/" + p.getIdProducto();
+		}
+		else
+			return "redirect:/index";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/perfil/{id}")
@@ -115,6 +129,9 @@ public class ProductoController {
 	@RequestMapping(method = RequestMethod.GET, value = "/agregarProducto/{idProducto}")
 	public String agregarAlCarrito( @PathVariable("idProducto") long idProducto,HttpServletRequest request) {
 		HttpSession s= request.getSession();
+		
+		if (s.getAttribute("idUsuario") == null)
+			return "redirect:/login";
 		
 		Producto p1= productoService.obtenerProducto(idProducto);
 		

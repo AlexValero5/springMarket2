@@ -47,6 +47,12 @@
 		#tabla{
 			margin: 1em;
 		}
+		
+		.botonoImg{
+			border-color: green;
+			border-style: groove;
+		}
+		
 	</style>
 
 
@@ -73,7 +79,7 @@
   	
 	  	<form th:action="@{/imagenes/cargar/{idProducto}(idProducto=${producto.idProducto})}"
 			method="POST" enctype="multipart/form-data">
-			<input name="file"  type="file" />
+			<input class="botonImg" name="file"  type="file" />
 				<input type="submit" value="Actualizar imagen"/>
 			
 		</form>
@@ -98,7 +104,7 @@
 										class="btn btn-danger" ><i class="fas fa-trash">Borrar Producto</i></a>
 		</p>
 			
-		<p th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'') OR hasAuthority(''ROL_USUARIO'')')}">							
+		<!-- <p th:if="${#authorization.expression('hasAuthority(''ROL_ADMIN'') OR hasAuthority(''ROL_USUARIO'')')}">		 -->					
 		<a th:href="@{'/producto/agregarProducto/{idProducto}'(idProducto=${producto.idProducto})}"
 										class="btn btn-danger" >Añadir al Carrito</a>
 		</p>
@@ -112,7 +118,7 @@
 	
 			<label for="pregunta">Pregunte aquí</label>
 			
-			<textarea 	name="pregunta" id="textoPregunta" placeholder="Escriba su Pregunta sobre el producto"></textarea>
+			<textarea  	name="pregunta" id="textoPregunta" placeholder="Escriba su Pregunta sobre el producto"></textarea>
 			</br>
 			<textarea 	name="idProducto" id="idProducto" th:text="${producto.idProducto}" style="display: none;"></textarea>
 			</br> 
@@ -142,8 +148,8 @@
 				<!--  <td th:id="${pregunta.idPregunta}" style="display: none;"></td>-->
 				<td th:text="${pregunta.fechaPregunta}"></td>
 				
-				<td >
-							<button type="button" id="botonResponder" class="btn btn-primary">Responder</button>
+				<td>
+							<button th:if="${session.idUsuario!=null}" type="button" id="botonResponder" class="btn btn-primary">Responder</button>
 							<div  style="display:none;">
 								<textarea id="textoRespuesta" name="textoRespuesta"
 									></textarea>
