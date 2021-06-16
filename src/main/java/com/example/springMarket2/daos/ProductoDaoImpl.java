@@ -40,5 +40,7 @@ public class ProductoDaoImpl extends DaoGenericoImpl<Producto> implements Produc
 		return null;
 	}
 	
+	
+	
 
 }

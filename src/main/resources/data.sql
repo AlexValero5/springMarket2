@@ -4,10 +4,10 @@ insert into PRODUCTO (NOMBRE,DESCRIPCION,PRECIO, DESCUENTO) values ('Tomate', 'F
 insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Manzana', 'Golden',3.0,1);
 insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Pera', 'Golden',4.0,1);
 insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Manzana', 'Royal Gala',2.0,1);
-insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Jamon', 'Ibérico Extremeño de bellota',10.0,2);
+insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Jamon', 'Ibérico ',10.0,2);
 insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Jamón', 'Cocido',4.0,1);
 insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Lomo', 'Ibérico de Caña',12.0,1);
-insert into PRODUCTO (NOMBRE, DESCRIPCION,PRECIO, DESCUENTO) values ('Pimiento', 'Verde',2.5,1);
+
 
 insert into ROL (ID_ROL, NOMBRE_ROL ) values (1, 'ROL_USUARIO');
 insert into ROL (ID_ROL, NOMBRE_ROL ) values (2,'ROL_ADMIN');
